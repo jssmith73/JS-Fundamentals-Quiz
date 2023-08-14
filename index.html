@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8";>
+        <link rel="stylesheet" href="assets/style.css">
+        <title>JavaScript Fundamentals Quiz</title>
+    </head>
+    <body>
+        <div class="startPage">
+            <h1>JavaScript Fundamentals Quiz</h1>
+            <button onclick="setTime()" class="button">Click here to begin!</button>        
+        </div>
+        <div class="quiz">
+            <h2> Current Count:
+                <span class="timer"></span>
+            </h2>
+        </div>
+        <div class="finish">
+            <h2>You finished!</h2>
+            <p>
+                Enter your intials and submit your score: 
+                <span id="scoreSubmit">
+                    <input type="text" max="3">
+                    <button class="submit">Submit</button>
+                </span>
+            </p>
+        </div>
+
+        <script src="assets/js/script.js"></script>
+        <script src="assets/js/questions.js"></script>
+    </body>
+</html>
