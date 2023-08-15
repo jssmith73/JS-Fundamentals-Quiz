@@ -3,28 +3,47 @@
     <head>
         <meta charset="UTF-8";>
         <link rel="stylesheet" href="assets/style.css">
-        <title>JavaScript Fundamentals Quiz</title>
+        <title>JavaScript Fundamentals Quiz</title>     
     </head>
+
     <body>
-        <div class="startPage">
-            <h1>JavaScript Fundamentals Quiz</h1>
-            <button onclick="setTime()" class="button">Click here to begin!</button>        
-        </div>
+
+        <header>
+            <h1 class="header-title"> JavaScript Fundamentals Quiz</h1>
+            <button id="button1">Click here to begin!</button>   
+        </header>
+
+        <section>
+       
         <div class="quiz">
-            <h2> Current Count:
+            <h2 class="counter"> Current Count:
                 <span class="timer"></span>
             </h2>
+            <!---->
+            <div class="questions-container">
+                <h3 id="question-title"></h3>
+                <ul id="options-list"></ul>
+            </div>
+    
+            <button id="submitBtn">Submit</button>
+            <p id="result"></p>
+            <!---->
         </div>
-        <div class="finish">
+        <div class="log-page">
+            <div class="finish">
             <h2>You finished!</h2>
-            <p>
-                Enter your intials and submit your score: 
+            <p>Enter your intials and submit your score:</p>
                 <span id="scoreSubmit">
-                    <input type="text" max="3">
-                    <button class="submit">Submit</button>
+                    <input type="text" max="3"><br>
                 </span>
-            </p>
+            <button class="submit">Submit</button>
+            </div>
+          <div class="log">
+            <h4>Highscores:</h4>
+          </div>
         </div>
+
+        </section>
 
         <script src="assets/js/script.js"></script>
         <script src="assets/js/questions.js"></script>
