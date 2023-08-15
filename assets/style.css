@@ -1,34 +1,62 @@
 :root {
     --bc: orange;
+    --header: navy;
 }
 
 * {
-    background-color: beige;
+    box-sizing: border-box;
+    background-color: lightskyblue;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-div {
-    border: solid 2px;
-    background-color: var(--bc);
-    margin-top: 25%;
-    height: 400px;
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    background-color: var(--header);
     text-align: center;
-    border-radius: 25px;
+    height: 150px;
+    width: 100%;
+}
+
+.header-title {
+    background-color: var(--header);
+    color: white;
+    padding-top: 15px;
+}
+
+section {
+    display: flex;
+}
+
+div {
+    border: solid 2px white;
+    background-color: var(--bc);
+    margin: 10px;
+    height: 450px;
+    text-align: center;
+    position: relative;
 }
 
 h1 {
     background-color: var(--bc);
-    margin-top: 20%;
+    margin-top: 0;
 }
 
 h2 {
     background-color: var(--bc);
-    margin-top: 100px;
 }
 
 button {
     font-size: large;
     font-weight: bold;
-    margin-top: 30px;
-    border-radius: 20px;    
+    /* space between divs */
+    margin-top: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    position: relative;
 }
 
 button:hover {
@@ -45,11 +73,45 @@ button:hover {
     padding: 10px;
 }
 
-.finish {
-    margin-bottom: 40px;
+.quiz {
+    width: 50%;
 }
 
-.finish p {
+.questions-container {
+    height: 320px;
+    padding: 20px;
+    text-align: center;
+}
+
+#question-box {
+    justify-content: center;
+}
+
+.finish {
+    height: 220px;
+    margin: 25px;
+    display: none;
+}
+
+.log-page{
+    margin-bottom: 40px;
+    position: relative;
+    width: 50%;
+}
+
+.log-page p {
     background-color: var(--bc);
     font-size: larger;
+}
+
+.log {
+    background-color: var(--bc);
+    height: 150px;
+    margin: 25px;
+    background-color: var(--bc);
+}
+
+h4 {
+    align-items: center;
+    background-color: var(--bc);
 }
