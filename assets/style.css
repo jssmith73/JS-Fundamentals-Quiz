@@ -87,6 +87,19 @@ button:hover {
     justify-content: center;
 }
 
+ul {
+    text-align: center;
+}
+
+li {
+    cursor: pointer;
+    list-style-type: none;
+}
+
+li:hover {
+    color: yellow;
+}
+
 .finish {
     height: 220px;
     margin: 25px;
