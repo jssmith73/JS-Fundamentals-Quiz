@@ -1,4 +1,5 @@
-exports var questions = [
+export function myFunction() {
+var questions = [
 {
     title: "Which of these stores the values 'true' and 'false'?",
     options: ["Numbers", "Booleans", "Prompts", "Strings"],
@@ -32,4 +33,5 @@ exports var questions = [
     options: ["3", "3.0", "2", "11"],
     answer: "2",
 }
-]
+] return questions;
+}

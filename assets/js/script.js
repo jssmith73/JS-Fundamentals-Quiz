@@ -9,60 +9,92 @@ var questionTitle = document.getElementById("question-title");
 var optionsList = document.getElementById("options-list");
 var submitButton = document.getElementById("submitBtn");
 var resultElement = document.getElementById("result");
+var questionIndex = 0;
 
-import { questions } from "./questions";
+import * as questions from './questions'
 
-//Loads random question from questions.js
+// var questions = [
+//     {
+//         title: "Which of these stores the values 'true' and 'false'?",
+//         options: ["Numbers", "Booleans", "Prompts", "Strings"],
+//         answer: "Booleans",
+//     },
+//     {
+//         title: "The condition in an if / else statement is enclosed within _________.",
+//         options: ["quotes", "curly brackets", "parentheses", "All of the above"],
+//         answer: "All of the above",
+//     },
+    
+//     {
+//         title: "String values must be enclosed within ______ when being assigned to variables.",
+//         options: ["commas", "curly brackets", "quotes", "parentheses"],
+//     },
+    
+//     {
+//         title: "A very useful too used during development and debuggin for printing content to the debugger is:",
+//         options: ["Javascript", "terminal / bash", "for loops", "console.log"],
+//         answer: "console.log",
+//     },
+    
+//     {
+//         title: "Arrays in JavaScript can be used to store ________",
+//         options: ["numbers and strings", "other arrays", "booleans", "all of the above"],
+//         answer: "all of the above",
+//     },
+    
+//     {
+//         title: "1+1=____",
+//         options: ["3", "3.0", "2", "11"],
+//         answer: "2",
+//     }
+//     ]
 
-function getQuestion(questions) {
-     questionTitle.textContent = questions.title;
+
+//Button that starts timer and starts quiz
+
+    startButton.addEventListener("click", setTime);
+
+    //Loads random question from questions.js
+
+function getQuestion() {
+    var currentQuestion = questions[questionIndex];
+    console.log(currentQuestion)
+     questionTitle.textContent = currentQuestion.title;
      optionsList.innerHTML = "";
 
-     questions.options.forEach(function(option, index) {
+     currentQuestion.options.forEach(function(option, index) {
         var listItem = document.createElement("li");
         listItem.textContent = option;
         optionsList.appendChild(listItem);
+        listItem.value = option;
+        listItem.addEventListener("click", checkAnswer)
      });
     }
 
-function checkAnswer(selectedIndex, question) {
-    var selectedOption = question.otipns[selectedIndex];
-    if (selectedOption === questions.answer) {
+function checkAnswer(event) {
+    var questionQuess = event.target.textContent;
+    console.log(questionQuess);
+    var currentQuestion = questions[questionIndex];
+    var selectedOption = currentQuestion.answer;
+    if (selectedOption === questionQuess) {
         resultElement.textContent = "Correct!";
+        questionIndex++;
+
     }    else {
-        resultElement.textContent = "Incorrect. The correct answer is: " + question.answer;
-    }
+        resultElement.textContent = "Incorrect. The correct answer is: " + currentQuestion.answer;
+        questionIndex++;
+        secondsLeft = secondsLeft-15;
+    } 
+    getQuestion();
 }
 
 submitButton.addEventListener("click", function() {
-    var selectedOptionIndex = document.querySelector('input[name="option"]:checked').value;
-    checkAnswer(selectedOptionIndex, questions[currentQuestionIndex]);
+    var selectedOptionIndex = document.querySelector("#answer-input").value;
+    checkAnswer(selectedOptionIndex, questions[questionIndex]);
 });
 
-var currentQuestionIndex = Math.floor(Math.random() * questions.length);
-displayQuestion(questions[currentQuestionIndex]);
-      
-    //  var currentQuestion = questions[questionsIndex];
-
-    //  titleEl.textContent = currentQuestion.title;
-
-
-
-    //  console.log("Question:", randomQuestion.title);
-    //  for (var i = 0; i < randomQuestion.options.length; i++) {
-    //     console.log(String.fromCharCode(97 + 1) + ") " + randomQuestion.options[1]);
-    //  }
-
-    //  var inputAnswer = "";
-
-    //  if (randomQuestion.options[userAnswer.charCodeAt(0) - 97] === randomQuestion.answer) {
-    //     console.log("Correct!");
-    //  } else {
-    //     console.log("Incorrect. The correct answer is:". randomQuestion.answer);
-    //  }
-        
-
-//Set timer function
+// var currentQuestionIndex = Math.floor(Math.random() * questions.length);
+// getQuestion(questions[currentQuestionIndex]);
 
 function setTime() {
 
@@ -75,25 +107,25 @@ function setTime() {
         secondsLeft--;
 
         if (secondsLeft > 0) {
-        hideDiv(hiddenDiv);
-        if (isWin === true && secondsLeft > 0) {
-        clearInterval(timerInterval);
-        winMessage();
+            hideDiv(hiddenDiv);
+            if (isWin === true && secondsLeft > 0) {
+            clearInterval(timerInterval);
+            winMessage();
+            }
         }
-    }
+        
+        if (secondsLeft === 0) {
+            clearInterval(timerInterval);
+            endMessage();
+            startButton.disabled = false;
+            hideDiv()
+            }
 
-    if (secondsLeft === 0) {
-        clearInterval(timerInterval);
-        endMessage();
-        startButton.disabled = false;
-        hideDiv()
-        }
-}, 1000);
+}, 1000)
+
+getQuestion();
+
 }
-
-//Button that starts timer and loads question
-
-startButton.addEventListener("click", setTime, getQuestion);
 
 //Win message
 
