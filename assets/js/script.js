@@ -76,6 +76,8 @@ function getQuestion() {
     }
 }
 
+//Checks if correct answer is selected
+
 function checkAnswer(event) {
     var questionQuess = event.target.textContent;
     console.log(questionIndex);
@@ -101,6 +103,8 @@ function checkAnswer(event) {
     getQuestion();
 }
 
+//Sets timer countdown
+
 function setTime() {
 
     startButton.disabled = true;
@@ -123,14 +127,15 @@ function setTime() {
 
 timerEl.textContent = secondsLeft;
 
+//Message displays if timer runs out
+
 function endQuiz() {
     endMessage();
 }
 
-//Win message
+//Win message displays after all questions are answered
 
 function winMessage() {
-    // timerEl.innerHTML = "YOU FINISHED!";
     unHideDiv();
     var finalScore = document.querySelector(".timer");
     finalScore.textContent = secondsLeft;
@@ -154,6 +159,7 @@ function unHideDiv() {
     }
 }
 
+//Logs score to local storage
 
 function logScore() {
 
@@ -179,25 +185,18 @@ console.log(newScore);
 submitButton.addEventListener("click", function() {
     localStorage.clear()
     logScore();
+    document.getElementById("confirm").textContent = "Submitted!"
+
 })
+
+//Shows previous score on the right
 
 function showScores() {
     if (localStorage.getItem("scores")) {
        
         var x = JSON.parse(localStorage.getItem("scores"))[0]
         wins.innerHTML = "Initials: " + x.initials + ", Score: " + x.score;
-        
-        // var y = JSON.parse(localStorage.getItem("scores"))[1]
-        // wins2.innerHTML = "Initials: " + y.initials + ", Score: " + y.score;
-       
-        // var z = JSON.parse(localStorage.getItem("scores"))[2]
-        // wins3.innerHTML = "Initials: " + z.initials + ", Score: " + z.score;
     }
 }
 
-
 showScores();
-
-// clearStorage.addEventListener("click", function() {
-//     localStorage.clear();
-// })
