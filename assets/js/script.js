@@ -1,5 +1,4 @@
 var timerEl = document.querySelector(".timer");
-var isWin = false;
 var startButton = document.getElementById("button1");
 var hiddenDiv = document.querySelector(".finish");
 var titleEl = document.querySelector("#question-title")
@@ -7,14 +6,14 @@ var secondsLeft = 75;
 var questionContainer = document.getElementById("question-container");
 var questionTitle = document.getElementById("question-title");
 var optionsList = document.getElementById("options-list");
-var submitButton = document.getElementById("submit");
+var submitButton = document.querySelector(".submit");
 var resultElement = document.getElementById("result");
 var questionIndex = 0;
 var highscoreMsg = document.querySelector(".highscoreMsg");
 var initials = document.getElementById("initials");
 var wins = document.getElementById("winLog");
-var losses = document.getElementById("loseLog");
-
+var finalScore = document.querySelector(".timer");
+    
 var questions = [
     {
         title: "Which of these stores the values 'true' and 'false'?",
@@ -47,8 +46,8 @@ var questions = [
     
     {
         title: "________ comments out one or multiple lines of code, disabling it without deleting.",
-        options: ["/*,*/", "!--", "{}", "[]"],
-        answer: "/* */",
+        options: ["//", "**", "{}", "[]"],
+        answer: "//",
     }
     ]
 
@@ -120,16 +119,20 @@ function setTime() {
         }}, 1000)
     }
 
+timerEl.textContent = secondsLeft;
+
 function endQuiz() {
     endMessage();
-    secondsLeft=75;
 }
 
 //Win message
 
 function winMessage() {
-    timerEl.innerHTML = "YOU FINISHED!";
+    // timerEl.innerHTML = "YOU FINISHED!";
     unHideDiv();
+    var finalScore = document.querySelector(".timer");
+    finalScore.textContent = secondsLeft;
+    console.log(finalScore);
 }
 
 //Lose message
@@ -147,36 +150,30 @@ function unHideDiv() {
     }
 }
 
-function saveScore() {
+var newScore = {
+    score: timerEl.textContent,
+    initials: initials,
+};
+
+
+function logScore() {
 
 if (initials !== "") {
 
 scores = JSON.parse(window.localStorage.getItem("scores")) || [];
 
-var newScore = {
-    score: secondsLeft,
-    initials: initials,
-};
 
 scores.push(newScore);
 window.localStorage.setItem("scores", JSON.stringify(scores));
 }
 }
 
-console.log(saveScore);
-
 submitButton.addEventListener("click", function() {
-saveScore;
-saveWins;
+logScore();
+showScores();
 })
 
-
-// localStorage.setItem("wins", JSON.stringify(wins));
-// localStorage.setItem("losses",JSON.stringify(losses));
-
-function saveWins() {
-    var previousWin = JSON.parse(localStorage.getItem(newScore.score + "," + newScore.initials));
-    if (previousWin !== null) {
-        document.querySelector("#winLog").textContent = previousWin;
-    }
+function showScores() {
+var x = localStorage.getItem("scores.score");
+wins.innerHTML = x;
 }
