@@ -46,9 +46,9 @@ var questions = [
     },
     
     {
-        title: "1+1=____",
-        options: ["3", "3.0", "2", "11"],
-        answer: "2",
+        title: "________ comments out one or multiple lines of code, disabling it without deleting.",
+        options: ["/*,*/", "!--", "{}", "[]"],
+        answer: "/* */",
     }
     ]
 
@@ -163,24 +163,20 @@ window.localStorage.setItem("scores", JSON.stringify(scores));
 }
 }
 
+console.log(saveScore);
 
-// submitButton.addEventListener("click", function(event) {
-// event.preventDefault();
+submitButton.addEventListener("click", function() {
+saveScore;
+saveWins;
+})
 
 
 // localStorage.setItem("wins", JSON.stringify(wins));
 // localStorage.setItem("losses",JSON.stringify(losses));
 
 function saveWins() {
-    var previousWin = JSON.parse(localStorage.getItem(wins))
+    var previousWin = JSON.parse(localStorage.getItem(newScore.score + "," + newScore.initials));
     if (previousWin !== null) {
         document.querySelector("#winLog").textContent = previousWin;
-    }
-}
-
-function saveLoss() {
-    var previousLoss = JSON.parse(localStorage.getItem(losses))
-    if (previousLoss !== null) {
-        document.querySelector("#loseLog").textContent = previousLoss;
     }
 }
