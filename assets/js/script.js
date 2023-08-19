@@ -15,6 +15,7 @@ var wins = document.getElementById("winLog");
 var wins2 = document.getElementById("winLog2");
 var wins3 = document.getElementById("winLog3")
 var finalScore = document.querySelector(".timer");
+var clearStorage = document.getElementById("clearStorage");
     
 var questions = [
     {
@@ -24,7 +25,7 @@ var questions = [
     },
     {
         title: "The condition in an if / else statement is enclosed within _________.",
-        options: ["quotes", "curly brackets", "parentheses", "All of the above"],
+        options: ["parentheses", "curly brackets", "quotes", "All of the above"],
         answer: "parentheses",
     },
     
@@ -36,7 +37,7 @@ var questions = [
     
     {
         title: "A very useful tool used during development and debugging for printing content to the debugger is:",
-        options: ["Javascript", "terminal / bash", "for loops", "console.log"],
+        options: ["Javascript", "console.log", "for loops", "terminal / bash"],
         answer: "console.log",
     },
     
@@ -164,27 +165,42 @@ function logScore() {
 
 console.log(newScore);
 
-scores = JSON.parse(window.localStorage.getItem("scores"));
-
-if (scores) {
-var saveScores = []
-saveScores.push(scores, newScore) 
-console.log(saveScores);
-window.localStorage.setItem("scores", JSON.stringify(saveScores));
-} else {
- window.localStorage.setItem("scores", JSON.stringify(newScore));
-}
+    if (!localStorage.getItem("scores")) {
+        scores = []
+        scores.push(newScore)
+        window.localStorage.setItem("scores", JSON.stringify(scores));
+    } else {
+        scores = JSON.parse(window.localStorage.getItem("scores"));
+        scores.push(newScore)
+        console.log(scores);
+        window.localStorage.setItem("scores", JSON.stringify(scores));
+    }
 }
 
 submitButton.addEventListener("click", function() {
-logScore();
+    logScore();
 })
 
 function showScores() {
-var x = localStorage.getItem("scores")
-wins.innerHTML = x;
-var y = localStorage.getItem("scores"[1])
-wins2.innerHTML = y;
-var z = localStorage.getItem("scores"[2]);
-wins3.innerHTML = z;
+    if (localStorage.getItem("scores")) {
+        if (localStorage.getItem("scores") !== null) {
+        var x = JSON.parse(localStorage.getItem("scores"))[0]
+        wins.innerHTML = "Initials: " + x.initials + ", Score: " + x.score;
+        }
+        if (localStorage.getItem(scores) !== undefined) {
+        var y = JSON.parse(localStorage.getItem("scores"))[1]
+        wins2.innerHTML = "Initials: " + y.initials + ", Score: " + y.score;
+        }
+        if (localStorage.getItem("scores") !== null) {
+        var z = JSON.parse(localStorage.getItem("scores"))[2]
+        wins3.innerHTML = "Initials: " + z.initials + ", Score: " + z.score;
+        }
+    }
+}
+
+
+showScores();
+
+function clear() {
+    localStorage.removeItem("scores");
 }
