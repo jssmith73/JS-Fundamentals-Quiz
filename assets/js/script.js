@@ -12,6 +12,8 @@ var questionIndex = 0;
 var highscoreMsg = document.querySelector(".highscoreMsg");
 var initials = document.getElementById("initials");
 var wins = document.getElementById("winLog");
+var wins2 = document.getElementById("winLog2");
+var wins3 = document.getElementById("winLog3")
 var finalScore = document.querySelector(".timer");
     
 var questions = [
@@ -132,7 +134,7 @@ function winMessage() {
     unHideDiv();
     var finalScore = document.querySelector(".timer");
     finalScore.textContent = secondsLeft;
-    console.log(finalScore);
+    console.log(secondsLeft);
 }
 
 //Lose message
@@ -145,35 +147,44 @@ function endMessage() {
 
 function unHideDiv() {
 
+    showScores();
+
     if (secondsLeft > 0) {
         hiddenDiv.style.display = "contents";
     }
 }
 
-var newScore = {
-    score: timerEl.textContent,
-    initials: initials,
-};
-
 
 function logScore() {
 
-if (initials !== "") {
+    var newScore = {
+        score: timerEl.textContent,
+        initials: initials.value,
+    };
 
-scores = JSON.parse(window.localStorage.getItem("scores")) || [];
+console.log(newScore);
 
+scores = JSON.parse(window.localStorage.getItem("scores"));
 
-scores.push(newScore);
-window.localStorage.setItem("scores", JSON.stringify(scores));
+if (scores) {
+var saveScores = []
+saveScores.push(scores, newScore) 
+console.log(saveScores);
+window.localStorage.setItem("scores", JSON.stringify(saveScores));
+} else {
+ window.localStorage.setItem("scores", JSON.stringify(newScore));
 }
 }
 
 submitButton.addEventListener("click", function() {
 logScore();
-showScores();
 })
 
 function showScores() {
-var x = localStorage.getItem("scores.score");
+var x = localStorage.getItem("scores")
 wins.innerHTML = x;
+var y = localStorage.getItem("scores"[1])
+wins2.innerHTML = y;
+var z = localStorage.getItem("scores"[2]);
+wins3.innerHTML = z;
 }
