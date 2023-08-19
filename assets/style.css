@@ -64,6 +64,13 @@ button:hover {
     border-color: blue;
 }
 
+.counter{
+    margin-top: 50px;
+}
+
+.highscoreMsg {
+    margin-top: 50px;
+}
 
 .timer {
     background-color: var(--bc);
@@ -78,7 +85,8 @@ button:hover {
 }
 
 .questions-container {
-    height: 320px;
+    height: 200px;
+    margin-top: 50px;
     padding: 20px;
     text-align: center;
 }
@@ -87,22 +95,33 @@ button:hover {
     justify-content: center;
 }
 
-ul {
+h3 {
+    background-color: var(--bc);
+}
+
+ol {
     text-align: center;
+    background-color: var(--bc);
 }
 
 li {
+    background-color: var(--bc);
     cursor: pointer;
-    list-style-type: none;
+    list-style-type:none;
+    margin-right: 25px;
 }
 
 li:hover {
     color: yellow;
 }
 
+#result {
+    background-color: var(--bc);
+    margin-top: 25px;
+}
+
 .finish {
-    height: 220px;
-    margin: 25px;
+    height: 68px;
     display: none;
 }
 
@@ -110,6 +129,7 @@ li:hover {
     margin-bottom: 40px;
     position: relative;
     width: 50%;
+    position: relative;
 }
 
 .log-page p {
@@ -119,9 +139,11 @@ li:hover {
 
 .log {
     background-color: var(--bc);
-    height: 150px;
-    margin: 25px;
+    height: 200px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     background-color: var(--bc);
+    position: relative;
 }
 
 h4 {

@@ -7,9 +7,13 @@ var secondsLeft = 75;
 var questionContainer = document.getElementById("question-container");
 var questionTitle = document.getElementById("question-title");
 var optionsList = document.getElementById("options-list");
-var submitButton = document.getElementById("submitBtn");
+var submitButton = document.getElementById("submit");
 var resultElement = document.getElementById("result");
 var questionIndex = 0;
+var highscoreMsg = document.querySelector(".highscoreMsg");
+var initials = document.getElementById("initials");
+var wins = document.getElementById("winLog");
+var losses = document.getElementById("loseLog");
 
 var questions = [
     {
@@ -56,17 +60,17 @@ var questions = [
     //Loads random question from questions.js
 
 function getQuestion() {
-    if (questionIndex <= questions.length) {
+    if (questionIndex < questions.length) {
     var currentQuestion = questions[questionIndex];
      questionTitle.textContent = currentQuestion.title;
      optionsList.innerHTML = "";
 
-     currentQuestion.options.forEach(function(option) {
+     currentQuestion.options.forEach(function(_option_) {
         var listItem = document.createElement("li");
-        listItem.textContent = option;
+        listItem.textContent = _option_;
         optionsList.appendChild(listItem);
-        listItem.value = option;
-        listItem.addEventListener("click", checkAnswer)
+        listItem.value = _option_;
+        listItem.addEventListener("click", checkAnswer);
      });
     }
 }
@@ -91,6 +95,7 @@ function checkAnswer(event) {
         clearInterval(timerInterval);
         endMessage();
         startButton.disabled = false;
+        questionIndex = 0;
     }
     getQuestion();
 }
@@ -103,31 +108,28 @@ function setTime() {
         timerEl.innerHTML = secondsLeft;
         secondsLeft--;
 
-        if (secondsLeft > 0) {
-            if (secondsLeft > 0 && questionIndex === questions.length) {
+        if (secondsLeft > 0 && questionIndex === questions.length && questions.answer !== "") {
             clearInterval(timerInterval);
             winMessage();
             }
-        }
-        
-        if (secondsLeft <= 0 || questionIndex === questions.length) {
+        if (secondsLeft <= 0) {
             clearInterval(timerInterval);
             endQuiz() 
         } else {
             getQuestion();
-        }
-        }, 1000);}
+        }}, 1000)
+    }
 
 function endQuiz() {
     endMessage();
-    startButton.disabled = false;
     secondsLeft=75;
 }
 
 //Win message
 
 function winMessage() {
-    timerEl.innerHTML = "YOU PASS!";
+    timerEl.innerHTML = "YOU FINISHED!";
+    unHideDiv();
 }
 
 //Lose message
@@ -136,17 +138,49 @@ function endMessage() {
     timerEl.innerHTML = "Out of time :(";
 }
 
-function passQuiz() {
-
-}
-
 //Hides finish page until quiz is passed
 
-function hideDiv() {
+function unHideDiv() {
 
-    if (secondsLeft > 0 && isWin === true) {
-        hiddenDiv.style.display = "block";
-    } 
-    else {
-        hiddenDiv.style.display = "none";
-    }}
+    if (secondsLeft > 0) {
+        hiddenDiv.style.display = "contents";
+    }
+}
+
+function saveScore() {
+
+if (initials !== "") {
+
+scores = JSON.parse(window.localStorage.getItem("scores")) || [];
+
+var newScore = {
+    score: secondsLeft,
+    initials: initials,
+};
+
+scores.push(newScore);
+window.localStorage.setItem("scores", JSON.stringify(scores));
+}
+}
+
+
+// submitButton.addEventListener("click", function(event) {
+// event.preventDefault();
+
+
+// localStorage.setItem("wins", JSON.stringify(wins));
+// localStorage.setItem("losses",JSON.stringify(losses));
+
+function saveWins() {
+    var previousWin = JSON.parse(localStorage.getItem(wins))
+    if (previousWin !== null) {
+        document.querySelector("#winLog").textContent = previousWin;
+    }
+}
+
+function saveLoss() {
+    var previousLoss = JSON.parse(localStorage.getItem(losses))
+    if (previousLoss !== null) {
+        document.querySelector("#loseLog").textContent = previousLoss;
+    }
+}

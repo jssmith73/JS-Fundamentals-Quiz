@@ -19,30 +19,26 @@
             <h2 class="counter"> Current Count:
                 <span class="timer"></span>
             </h2>
-            <!---->
             <div class="questions-container">
                 <h3 id="question-title"></h3>
-                <ul id="options-list"></ul><br>
+                <ol id="options-list"></ol><br>
             <p id="result"></p>
             </div>
-            
-            
-            <!---->
         </div>
+
         <div class="log-page">
             <div class="finish">
             <h2>You finished!</h2>
             <p>Enter your intials and submit your score:</p>
                 <span id="scoreSubmit">
-                    <input type="text" max="3"><br>
-                </span>
+                    <input type="text" maxlength="3" placeholder="Enter Initials Here" id="initials"><br>
+                </span><br>
             <button class="submit">Submit</button>
             </div>
           <div class="log">
             <h4>Highscores:</h4>
             <p id="winLog"></p>
             <p id="loseLog"></p>
-          </div>
         </div>
 
         </section>
