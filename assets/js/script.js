@@ -15,7 +15,6 @@ var wins = document.getElementById("winLog");
 var wins2 = document.getElementById("winLog2");
 var wins3 = document.getElementById("winLog3")
 var finalScore = document.querySelector(".timer");
-var clearStorage = document.getElementById("clearStorage");
     
 var questions = [
     {
@@ -178,29 +177,27 @@ console.log(newScore);
 }
 
 submitButton.addEventListener("click", function() {
+    localStorage.clear()
     logScore();
 })
 
 function showScores() {
     if (localStorage.getItem("scores")) {
-        if (localStorage.getItem("scores") !== null) {
+       
         var x = JSON.parse(localStorage.getItem("scores"))[0]
         wins.innerHTML = "Initials: " + x.initials + ", Score: " + x.score;
-        }
-        if (localStorage.getItem(scores) !== undefined) {
-        var y = JSON.parse(localStorage.getItem("scores"))[1]
-        wins2.innerHTML = "Initials: " + y.initials + ", Score: " + y.score;
-        }
-        if (localStorage.getItem("scores") !== null) {
-        var z = JSON.parse(localStorage.getItem("scores"))[2]
-        wins3.innerHTML = "Initials: " + z.initials + ", Score: " + z.score;
-        }
+        
+        // var y = JSON.parse(localStorage.getItem("scores"))[1]
+        // wins2.innerHTML = "Initials: " + y.initials + ", Score: " + y.score;
+       
+        // var z = JSON.parse(localStorage.getItem("scores"))[2]
+        // wins3.innerHTML = "Initials: " + z.initials + ", Score: " + z.score;
     }
 }
 
 
 showScores();
 
-function clear() {
-    localStorage.removeItem("scores");
-}
+// clearStorage.addEventListener("click", function() {
+//     localStorage.clear();
+// })
